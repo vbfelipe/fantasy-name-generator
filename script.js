@@ -1,4 +1,3 @@
-// DATA
 const syllables = {
   start: [
     "Ae","Aea","Ael","Aela","Aer","Aeri","Aeth","Aeva","Aez","Ain","Aira","Aith",
@@ -31,7 +30,21 @@ const syllables = {
     "Val","Var","Vor","Vorn",
     "Wil","Wern","Wyr",
     "Xan","Xor","Xyr",
-    "Zae","Zael","Zar","Zarn","Zor","Zyra"
+    "Zae","Zael","Zar","Zarn","Zor","Zyra",
+    "Avar","Avra","Axel","Brynth","Cael","Cyran","Dely","Dorn","Erynd","Fyn",
+    "Glyr","Hav","Ithar","Jor","Kaelth","Klyr","Lur","Myn","Niv","Oryn",
+    "Phael","Quen","Ryn","Selyn","Thy","Ulric","Vey","Wyn","Xyran","Yvel",
+    "Zy","Zer","Alar","Belth","Caly","Draen","Elyr","Fynar","Gryth","Hyl",
+    "Ivor","Jhael","Kry","Lareth","Myth","Nerth","Olyn","Pyr","Quar","Rhael",
+    "Soryn","Thar","Ulv","Veyr","Wyra","Xal","Yth","Zyric",
+    "Aelthor","Branth","Calith","Doryn","Elythar","Fyral","Glythar","Hyrn","Ithyl","Joryn",
+    "Kryal","Lythor","Moryn","Nythar","Olyth","Pyral","Qoryn","Rynth","Saryth","Tyral",
+    "Ulyth","Voryn","Wyral","Xoryn","Ylithar","Zoryn","Althar","Brynor","Calyn","Daryth",
+    "Elvar","Foryn","Glyar","Horyn","Ivar","Jyn","Koryth","Lyral","Moryth","Noryn",
+    "Oryth","Pyrn","Qyra","Rynal","Soryth","Tyn","Uryl","Varyth","Wyrnith","Xyral",
+    "Yryth","Zaryth","Alyr","Baryth","Coryn","Daryth","Elyra","Fyrn","Goryth","Hyral",
+    "Iryn","Joryth","Kyral","Loryn","Myraen","Noryth","Olyra","Pryth","Qoryth","Rynar",
+    "Syral","Toryn","Ulyra","Vyrn","Woryth","Xyra","Yloryn","Zyraen"
   ],
 
   middle: [
@@ -46,7 +59,16 @@ const syllables = {
     "ven","val","var","vyr",
     "mor","myn","myr",
     "rax","reth","zor","zeth",
-    "aei","eia","ioe","uae"
+    "aei","eia","ioe","uae",
+    "yra","ythe","ryn","ly","thil","mir","varn","dor","rynth","ethil",
+    "aelth","ion","iel","oril","iryn","uly","othil","irath","ylen","elith",
+    "oryn","irith","uthal","yraen","alith","othar","elyn","iath","olyn","yser",
+    "ithar","uril","orin","ythal","enor","uvar","aeth","evar","ioth","aeryn",
+    "ylor","emir","ynor","ovar","alor","ivor","ythen","elir","orin","aril",
+    "ynith","thar","evarn","orith","ylith","uvarn","arion","ionth","alyth","omir",
+    "urath","ilorn","alyn","yther","emoth","oryth","ivarn","urith","ylorn","aral",
+    "ioneth","othil","uriel","ylar","enith","ovaril","ithral","alythar","orya","emyr",
+    "urathil","ilyth","orynth","alyra","evaril","ithal","oryra","ulith","orythar","elion"
   ],
 
   end: [
@@ -63,7 +85,19 @@ const syllables = {
     "var","vash","vorn",
     "xar","xeth","xion",
     "zair","zor","zoth","zryn",
-    "doom","shade","void","bane"
+    "doom","shade","void","bane",
+    "aeris","alyth","arion","avyr","bryn","cyn","draen","elith","fyrn","goryn",
+    "hym","ithor","jorn","kael","lyth","myrn","nyr","oryn","pyth","qyr",
+    "ryth","syth","thir","uryn","vyrn","wyrn","xalith","yvar","zaryn","zyth",
+    "alorn","bryth","cyra","daryn","elys","fyrion","gyth","hyr","ioryn","jaryn",
+    "koryn","lyra","myth","nyth","orya","pyra","qyth","rya","syra","tyn",
+    "uriel","voryn","wyrith","xyr","yraen","zoryn","azeth","brith","caryth","dyrn",
+    "elyth","faryn","goryth","hyrn","ilyth","joryn","kyr","lythar","myrion","nyl",
+    "oryth","pythar","qyrn","rythar","sythil","tyr","urith","vory","wyrnith","xyral",
+    "azor","bryal","cyth","doryth","elyra","fyrnal","gyl","hyral","ioryth","jyn",
+    "kyth","lyral","myrth","nyral","orythar","pyral","qyrth","rynal","sythar","tyl",
+    "uryn","voryth","wyrnal","xyrith","yral","zoryth","alyra","brynar","coryth","daryra",
+    "elythar","fyrnith","gorynth","hyralith","ilyra","jorythar","korynth","lyralith","myrion","nyralith"
   ]
 };
 
