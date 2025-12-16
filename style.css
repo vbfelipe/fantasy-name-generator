@@ -144,7 +144,7 @@ button:active {
 /* Realm glow colors */
 .realm-human.active  { --glow: 255, 215, 140; }
 .realm-elf.active    { --glow: 120, 255, 180; }
-.realm-dark.active   { --glow: 150, 10, 10;   }
+.realm-dark.active   { --glow: 185, 35, 35;   }
 .realm-random.active { --glow: 255, 255, 255; }
 
 /* Glow animation */
@@ -170,13 +170,19 @@ button:active {
     font-size: 2rem;
     font-weight: 700;
     letter-spacing: 0.1em;
-    color: #eaeaff;
+
+    /* USE THE REALM GLOW */
+    color: rgb(var(--glow, 234, 234, 255));
+
     text-shadow:
-        0 0 10px rgba(138, 123, 255, 0.8),
-        0 0 20px rgba(138, 123, 255, 0.6),
-        0 0 30px rgba(138, 123, 255, 0.4);
+        0 0 10px rgba(var(--glow, 234, 234, 255), 0.8),
+        0 0 20px rgba(var(--glow, 234, 234, 255), 0.6),
+        0 0 30px rgba(var(--glow, 234, 234, 255), 0.4);
+
     margin-bottom: 1.5rem;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
 }
+
 
 /* Footer */
 .footer {

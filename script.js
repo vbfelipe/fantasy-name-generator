@@ -198,21 +198,37 @@ function generateName() {
     return name;
 }
 
-// UI LOGIC
 document.addEventListener("DOMContentLoaded", () => {
     const realmButtons = document.querySelectorAll(".realm-btn");
     const generateBtn = document.getElementById("generateBtn");
     const output = document.getElementById("name");
 
+    // --- REALM SELECTION ---
     realmButtons.forEach(btn => {
         btn.addEventListener("click", () => {
             realmButtons.forEach(b => b.classList.remove("active"));
             btn.classList.add("active");
+
             currentRealm = btn.dataset.realm;
         });
     });
 
+    // --- APPLY DEFAULT REALM COLOR ON LOAD (HUMAN) ---
+    const defaultBtn = document.querySelector(".realm-btn.active");
+    if (defaultBtn) {
+        const glow = getComputedStyle(defaultBtn).getPropertyValue("--glow");
+        output.style.setProperty("--glow", glow);
+    }
+
+    // --- GENERATE NAME (THIS is when color updates) ---
     generateBtn.addEventListener("click", () => {
-        output.textContent = generateName();
+        const name = generateName();
+        output.textContent = name;
+
+        const activeBtn = document.querySelector(".realm-btn.active");
+        if (activeBtn) {
+            const glow = getComputedStyle(activeBtn).getPropertyValue("--glow");
+            output.style.setProperty("--glow", glow);
+        }
     });
 });
