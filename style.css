@@ -40,11 +40,9 @@ body {
     max-width: 420px;
     width: 100%;
 
-    /* ultra-light glass */
     background: rgba(20, 20, 20, 0.14);
     backdrop-filter: blur(10px);
 
-    /* refined depth */
     box-shadow:
         0 16px 36px rgba(0, 0, 0, 0.35),
         inset 0 0 0 1px rgba(255, 255, 255, 0.22);
@@ -53,18 +51,9 @@ body {
 }
 
 @keyframes fadeFloat {
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    50% {
-        opacity: 0.6;
-        transform: translateY(-10px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    0% { opacity: 0; transform: translateY(30px); }
+    50% { opacity: 0.6; transform: translateY(-10px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 /* Title */
@@ -87,7 +76,7 @@ body {
     color: rgba(255, 255, 255, 0.65);
 }
 
-/* Button */
+/* Buttons (base) */
 button {
     font-size: 1rem;
     padding: 0.75rem 1.6rem;
@@ -95,7 +84,6 @@ button {
     border: none;
     border-radius: 999px;
 
-    /* glass base */
     background: rgba(255, 255, 255, 0.14);
     backdrop-filter: blur(10px) saturate(140%);
     -webkit-backdrop-filter: blur(10px) saturate(140%);
@@ -104,16 +92,12 @@ button {
     font-weight: 600;
     letter-spacing: 0.03em;
 
-    /* glass edges + depth */
     box-shadow:
         0 10px 24px rgba(0, 0, 0, 0.35),
         inset 0 0 0 1px rgba(255, 255, 255, 0.35),
         inset 0 1px 0 rgba(255, 255, 255, 0.25);
 
-    transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease,
-        background 0.15s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
 
 button:hover {
@@ -127,23 +111,70 @@ button:hover {
 button:active {
     transform: translateY(0);
     background: rgba(255, 255, 255, 0.12);
-    box-shadow:
-        0 6px 14px rgba(0, 0, 0, 0.35),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+
+/* Realm selector */
+.realm-selector {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-bottom: 1.4rem;
+}
+
+/* Realm buttons */
+.realm-btn {
+    font-size: 0.85rem;
+    padding: 0.55rem 1.1rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    width: 150px; 
+
+    --glow: 255, 255, 255; /* fallback */
+}
+
+/* Active realm (shared behavior) */
+.realm-btn.active {
+    opacity: 1;
+    animation: realmGlow 0.6s ease-in-out infinite alternate;
+}
+
+/* Realm glow colors */
+.realm-human.active  { --glow: 255, 215, 140; }
+.realm-elf.active    { --glow: 120, 255, 180; }
+.realm-dark.active   { --glow: 150, 10, 10;   }
+.realm-random.active { --glow: 255, 255, 255; }
+
+/* Glow animation */
+@keyframes realmGlow {
+    0% {
+        box-shadow:
+            0 12px 28px rgba(0, 0, 0, 0.45),
+            inset 0 0 0 1px rgba(255, 255, 255, 0.45),
+            inset 0 0 12px rgba(var(--glow), 0.45),
+            0 0 0 rgba(var(--glow), 0);
+    }
+    100% {
+        box-shadow:
+            0 12px 28px rgba(0, 0, 0, 0.45),
+            inset 0 0 0 1px rgba(255, 255, 255, 0.6),
+            inset 0 0 18px rgba(var(--glow), 0.7),
+            0 0 22px rgba(var(--glow), 0.55);
+    }
 }
 
 /* Name output */
 #name {
     font-size: 2rem;
-    font-weight: 700; 
-    letter-spacing: 0.1em; 
+    font-weight: 700;
+    letter-spacing: 0.1em;
     color: #eaeaff;
-    text-shadow: 
-        0 0 10px rgba(138, 123, 255, 0.8), 
-        0 0 20px rgba(138, 123, 255, 0.6), 
+    text-shadow:
+        0 0 10px rgba(138, 123, 255, 0.8),
+        0 0 20px rgba(138, 123, 255, 0.6),
         0 0 30px rgba(138, 123, 255, 0.4);
     margin-bottom: 1.5rem;
-    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 /* Footer */
@@ -164,7 +195,5 @@ button:active {
 }
 
 @media (max-height: 600px) {
-    .footer {
-        display: none;
-    }
+    .footer { display: none; }
 }

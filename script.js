@@ -137,6 +137,20 @@ function generateName() {
     return name;
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    const realmButtons = document.querySelectorAll(".realm-btn");
+
+    realmButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            // remove active from all
+            realmButtons.forEach(b => b.classList.remove("active"));
+
+            // activate clicked one
+            btn.classList.add("active");
+        });
+    });
+});
+
 // UI LOGIC
 document.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById("generateBtn");
