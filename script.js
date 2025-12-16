@@ -1,3 +1,5 @@
+// MECHANICS
+
 const syllables = {
   start: [
     "Ae","Aea","Ael","Aela","Aer","Aeri","Aeth","Aeva","Aez","Ain","Aira","Aith",
@@ -101,62 +103,116 @@ const syllables = {
   ]
 };
 
-// HELPER
+// REALM STATE
+let currentRealm = "human";
+
+// REALM FILTERS 
+const realmFilters = {
+   human: s =>
+    !/(ae|ea|io|ia|th|eth|ion|x|y|z|q|kr|gr|dr|mor|nox)/i.test(s) &&
+    /(n|r|l|s|d|t)$/i.test(s) &&
+    s.length <= 4,
+    elf: s => /ae|el|li|th|y|ia|io|ea/i.test(s),
+    dark: s => /x|z|q|kr|gr|dr|th|mor|nox/i.test(s),
+    random: () => true
+};
+
+// REALM GENERATION RULES
+const realmRules = {
+    human: {
+        min: 4,
+        max: 6,
+        middleChance: 0.3,
+        secondMiddleChance: 0
+    },
+    elf: {
+        min: 5,
+        max: 8,
+        middleChance: 0.8,
+        secondMiddleChance: 0.25
+    },
+    dark: {
+        min: 5,
+        max: 8,
+        middleChance: 0.65,
+        secondMiddleChance: 0.4
+    },
+    random: {
+        min: 5,
+        max: 8,
+        middleChance: 0.6,
+        secondMiddleChance: 0.2
+    }
+};
+
+// ENDING BIAS 
+const endBias = {
+    human: s => /n|r|l|s$/i.test(s),
+    elf: s => /a|iel|ion|ith|yn$/i.test(s),
+    dark: s => /th|x|z|r|n|g|k$/i.test(s),
+    random: () => true
+};
+
+// HELPERS
 function rand(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
 }
 
+function getRealmSyllables(type) {
+    const filter = realmFilters[type] || realmFilters.random;
+    const endFilter = endBias[type] || endBias.random;
+
+    return {
+        start: syllables.start.filter(filter),
+        middle: syllables.middle.filter(filter),
+        end: syllables.end.filter(s => filter(s) && endFilter(s))
+    };
+}
+
 // GENERATOR
 function generateName() {
-    let name = rand(syllables.start);
+    const pool = getRealmSyllables(currentRealm);
+    const rules = realmRules[currentRealm];
 
-    if (Math.random() > 0.5) {
-        name += rand(syllables.middle);
+    if (!pool.start.length || !pool.end.length) {
+        return "Error";
     }
 
-    // rare second middle
-    if (Math.random() > 0.85) {
-        name += rand(syllables.middle);
+    let name = rand(pool.start);
+
+    if (Math.random() < rules.middleChance && pool.middle.length) {
+        name += rand(pool.middle);
     }
 
-    name += rand(syllables.end);
+    if (Math.random() < rules.secondMiddleChance && pool.middle.length) {
+        name += rand(pool.middle);
+    }
 
-    // Capitalize
+    name += rand(pool.end);
+
     name = name[0].toUpperCase() + name.slice(1);
 
-    // kill vowel explosions
-    if (/[aeiou]{3,}/i.test(name)) {
-        return generateName();
-    }
-
-    // keep names readable
-    if (name.length < 5 || name.length > 8) {
-        return generateName();
-    }
+    if (/[aeiou]{3,}/i.test(name)) return generateName();
+    if (name.length < rules.min || name.length > rules.max) return generateName();
 
     return name;
 }
 
+// UI LOGIC
 document.addEventListener("DOMContentLoaded", () => {
     const realmButtons = document.querySelectorAll(".realm-btn");
+    const generateBtn = document.getElementById("generateBtn");
+    const output = document.getElementById("name");
 
     realmButtons.forEach(btn => {
         btn.addEventListener("click", () => {
-            // remove active from all
             realmButtons.forEach(b => b.classList.remove("active"));
-
-            // activate clicked one
             btn.classList.add("active");
+            currentRealm = btn.dataset.realm;
         });
     });
-});
 
-// UI LOGIC
-document.addEventListener("DOMContentLoaded", () => {
-    const btn = document.getElementById("generateBtn");
-    const output = document.getElementById("name");
-
-    btn.addEventListener("click", () => {
+    generateBtn.addEventListener("click", () => {
         output.textContent = generateName();
     });
 });
