@@ -5,7 +5,7 @@
 
 /* Global */
 body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Cinzel', serif;
     background:
         radial-gradient(
             circle at center,
@@ -78,6 +78,7 @@ body {
 
 /* Buttons (base) */
 button {
+    font-family: 'Cinzel', serif;
     font-size: 1rem;
     padding: 0.75rem 1.6rem;
     cursor: pointer;
@@ -124,12 +125,12 @@ button:active {
 
 /* Realm buttons */
 .realm-btn {
+    font-family: 'Cinzel', serif;
     font-size: 0.85rem;
     padding: 0.55rem 1.1rem;
     letter-spacing: 0.06em;
-    text-transform: uppercase;
     opacity: 0.85;
-    width: 150px; 
+    width: 140px; 
 
     --glow: 255, 255, 255; /* fallback */
 }
