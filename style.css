@@ -144,7 +144,7 @@ button:active {
 /* Realm glow colors */
 .realm-human.active  { --glow: 255, 215, 140; }
 .realm-elf.active    { --glow: 120, 255, 180; }
-.realm-dark.active   { --glow: 185, 35, 35;   }
+.realm-dark.active   { --glow: 200, 45, 45;   }
 .realm-random.active { --glow: 255, 255, 255; }
 
 /* Glow animation */
@@ -165,6 +165,25 @@ button:active {
     }
 }
 
+.realm-description {
+    --glow: 255, 255, 255;
+
+    margin: 0.6rem 0 1.2rem;
+    font-size: 0.85rem;
+    font-style: italic;
+    letter-spacing: 0.04em;
+
+    color: rgb(var(--glow));
+    text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.6),
+    0 0 12px rgba(var(--glow), 0.5);
+
+    transition:
+        color 0.25s ease,
+        text-shadow 0.25s ease,
+        opacity 0.25s ease;
+}
+
 /* Name output */
 #name {
     font-size: 2rem;
@@ -182,7 +201,6 @@ button:active {
     margin-bottom: 1.5rem;
     transition: color 0.3s ease, text-shadow 0.3s ease;
 }
-
 
 /* Footer */
 .footer {

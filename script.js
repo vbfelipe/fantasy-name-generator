@@ -198,37 +198,69 @@ function generateName() {
     return name;
 }
 
+// REALM DESCRIPTIONS
+const realmDescriptions = {
+    human: "Timeless names from the lands of men",
+    elf: "Ancient and melodic forest tongues",
+    dark: "Names whispered in forgotten places",
+    random: "Names drawn from fate itself"
+};
+
 document.addEventListener("DOMContentLoaded", () => {
     const realmButtons = document.querySelectorAll(".realm-btn");
     const generateBtn = document.getElementById("generateBtn");
     const output = document.getElementById("name");
+    const description = document.getElementById("realm-description");
 
-    // --- REALM SELECTION ---
+    const getGlowFromBtn = btn =>
+        getComputedStyle(btn).getPropertyValue("--glow");
+
+    // APPLY DEFAULT REALM (HUMAN)
+    const defaultBtn = document.querySelector(".realm-btn.active");
+
+    if (defaultBtn) {
+        const glow = getGlowFromBtn(defaultBtn);
+
+        // Name color (default)
+        output.style.setProperty("--glow", glow);
+
+        // Description color + text
+        if (description) {
+            description.textContent = realmDescriptions[currentRealm];
+            description.style.setProperty("--glow", glow);
+        }
+    }
+
+    // REALM SELECTION (description updates here)
     realmButtons.forEach(btn => {
         btn.addEventListener("click", () => {
             realmButtons.forEach(b => b.classList.remove("active"));
             btn.classList.add("active");
 
             currentRealm = btn.dataset.realm;
+
+            if (description) {
+                const glow = getGlowFromBtn(btn);
+
+                description.style.opacity = "0";
+                setTimeout(() => {
+                    description.textContent = realmDescriptions[currentRealm];
+                    description.style.setProperty("--glow", glow);
+                    description.style.opacity = "1";
+                }, 150);
+            }
         });
     });
 
-    // --- APPLY DEFAULT REALM COLOR ON LOAD (HUMAN) ---
-    const defaultBtn = document.querySelector(".realm-btn.active");
-    if (defaultBtn) {
-        const glow = getComputedStyle(defaultBtn).getPropertyValue("--glow");
-        output.style.setProperty("--glow", glow);
-    }
-
-    // --- GENERATE NAME (THIS is when color updates) ---
+    // GENERATE NAME (name color updates here ONLY)
     generateBtn.addEventListener("click", () => {
-        const name = generateName();
-        output.textContent = name;
+        output.textContent = generateName();
 
         const activeBtn = document.querySelector(".realm-btn.active");
         if (activeBtn) {
-            const glow = getComputedStyle(activeBtn).getPropertyValue("--glow");
+            const glow = getGlowFromBtn(activeBtn);
             output.style.setProperty("--glow", glow);
         }
     });
 });
+
