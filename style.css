@@ -1,9 +1,17 @@
+/* GLOBAL LOCKS */
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
 /* Global Reset */
 *, *::before, *::after {
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
-/* Global */
+/* GLOBAL */
 body {
     font-family: 'Cinzel', serif;
     background:
@@ -32,16 +40,17 @@ body {
     margin: 0;
 }
 
-/* Container */
+/* CONTAINER */
 .container {
     text-align: center;
-    padding: clamp(1.5rem, 4vw, 2.5rem);
+    padding: 2rem; /* stabilized */
     border-radius: 16px;
     max-width: 420px;
     width: 100%;
 
     background: rgba(20, 20, 20, 0.14);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 
     box-shadow:
         0 16px 36px rgba(0, 0, 0, 0.35),
@@ -56,7 +65,7 @@ body {
     100% { opacity: 1; transform: translateY(0); }
 }
 
-/* Title */
+/* TITLES */
 .container h1 {
     font-size: 1.6rem;
     margin-bottom: 1.5rem;
@@ -64,7 +73,6 @@ body {
     color: #f2f2f2;
 }
 
-/* Subtitle */
 .container h2 {
     margin-top: 0.6rem;
     font-size: 0.85rem;
@@ -76,7 +84,7 @@ body {
     color: rgba(255, 255, 255, 0.65);
 }
 
-/* Buttons (base) */
+/* BUTTONS (LOCKED) */
 button {
     font-family: 'Cinzel', serif;
     font-size: 1rem;
@@ -99,6 +107,10 @@ button {
         inset 0 1px 0 rgba(255, 255, 255, 0.25);
 
     transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+
+    /* mobile fixes */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 button:hover {
@@ -114,7 +126,7 @@ button:active {
     background: rgba(255, 255, 255, 0.12);
 }
 
-/* Realm selector */
+/* REALM SELECTOR */
 .realm-selector {
     display: flex;
     flex-wrap: wrap;
@@ -123,38 +135,32 @@ button:active {
     margin-bottom: 1.4rem;
 }
 
-/* Realm buttons */
 .realm-btn {
-    font-family: 'Cinzel', serif;
     font-size: 0.85rem;
     padding: 0.55rem 1.1rem;
     letter-spacing: 0.06em;
     opacity: 0.85;
-    width: 140px; 
+    width: 140px;
 
-    --glow: 255, 255, 255; /* fallback */
+    --glow: 255, 255, 255;
 }
 
-/* Active realm (shared behavior) */
 .realm-btn.active {
     opacity: 1;
     animation: realmGlow 0.6s ease-in-out infinite alternate;
 }
 
-/* Realm glow colors */
 .realm-human.active  { --glow: 255, 215, 140; }
 .realm-elf.active    { --glow: 120, 255, 180; }
-.realm-dark.active   { --glow: 200, 45, 45;   }
+.realm-dark.active   { --glow: 200, 45, 45; }
 .realm-random.active { --glow: 255, 255, 255; }
 
-/* Glow animation */
 @keyframes realmGlow {
     0% {
         box-shadow:
             0 12px 28px rgba(0, 0, 0, 0.45),
             inset 0 0 0 1px rgba(255, 255, 255, 0.45),
-            inset 0 0 12px rgba(var(--glow), 0.45),
-            0 0 0 rgba(var(--glow), 0);
+            inset 0 0 12px rgba(var(--glow), 0.45);
     }
     100% {
         box-shadow:
@@ -165,9 +171,8 @@ button:active {
     }
 }
 
+/* TEXT */
 .realm-description {
-    --glow: 255, 255, 255;
-
     margin: 0.6rem 0 1.2rem;
     font-size: 0.85rem;
     font-style: italic;
@@ -175,22 +180,15 @@ button:active {
 
     color: rgb(var(--glow));
     text-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.6),
-    0 0 12px rgba(var(--glow), 0.5);
-
-    transition:
-        color 0.25s ease,
-        text-shadow 0.25s ease,
-        opacity 0.25s ease;
+        0 2px 4px rgba(0, 0, 0, 0.6),
+        0 0 12px rgba(var(--glow), 0.5);
 }
 
-/* Name output */
 #name {
     font-size: 2rem;
     font-weight: 700;
     letter-spacing: 0.1em;
 
-    /* USE THE REALM GLOW */
     color: rgb(var(--glow, 234, 234, 255));
 
     text-shadow:
@@ -199,10 +197,9 @@ button:active {
         0 0 30px rgba(var(--glow, 234, 234, 255), 0.4);
 
     margin-bottom: 1.5rem;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
-/* Footer */
+/* FOOTER */
 .footer {
     position: fixed;
     bottom: 0.8rem;
